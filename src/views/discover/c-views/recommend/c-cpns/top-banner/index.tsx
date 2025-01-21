@@ -70,9 +70,9 @@ const TopBanner: FC<IProps> = () => {
             autoplaySpeed={4000}
             waitForAnimate={true}
           >
-            {banners.map((item) => {
+            {banners.map((item, index) => {
               return (
-                <div className="banner-item" key={item.imageUrl}>
+                <div className="banner-item" key={index}>
                   <img src={item.imageUrl} alt={item.typeTitle} />
                 </div>
               )
