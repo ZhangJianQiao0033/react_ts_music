@@ -4,6 +4,8 @@ import { Carousel } from 'antd'
 
 import { NewAlbumWrapper } from './styled'
 import AreaHeaderV1 from '@/components/area-header-v1'
+import { useAppSelector } from '@/store'
+import NewAlbumItem from '@/components/new-album-item'
 
 interface IProps {
   children?: ReactNode
@@ -11,7 +13,9 @@ interface IProps {
 
 const NewAlbum: FC<IProps> = () => {
   const bannerRef = useRef<ElementRef<typeof Carousel>>(null)
-
+  const { newAlbums } = useAppSelector((state) => ({
+    newAlbums: state.recommend.newAlbums
+  }))
   function handlePrevClick() {
     bannerRef.current?.prev()
   }
@@ -34,36 +38,13 @@ const NewAlbum: FC<IProps> = () => {
             slidesToShow={5}
             slidesToScroll={5}
           >
-            <div>
-              <h3>1</h3>
-            </div>
-            <div>
-              <h3>2</h3>
-            </div>
-            <div>
-              <h3>3</h3>
-            </div>
-            <div>
-              <h3>4</h3>
-            </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6</h3>
-            </div>
-            <div>
-              <h3>7</h3>
-            </div>
-            <div>
-              <h3>8</h3>
-            </div>
-            <div>
-              <h3>9</h3>
-            </div>
-            <div>
-              <h3>10</h3>
-            </div>
+            {newAlbums.slice(0, 10).map((item, index) => {
+              return (
+                <div key={index}>
+                  <NewAlbumItem itemData={item} />
+                </div>
+              )
+            })}
           </Carousel>
         </div>
 
