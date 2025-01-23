@@ -20,3 +20,12 @@ export function getNewAlbum() {
     url: '/album/newest'
   })
 }
+
+export function getPlaylistDetail(id: number) {
+  return hyRequest.request({
+    url: '/playlist/detail',
+    params: {
+      id
+    }
+  })
+}

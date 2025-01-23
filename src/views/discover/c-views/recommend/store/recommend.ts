@@ -1,29 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getBanners, getNewAlbum, getRecommend } from '../service/recommend'
-
-// export const fetchBannerDataAction = createAsyncThunk(
-//   'recommend',
-//   async (args, { dispatch }) => {
-//     const result = await getBanners()
-//     dispatch(changeBannersAction(result.banners))
-//   }
-// )
-
-// export const fetchRecommendDataAction = createAsyncThunk(
-//   'hotRecommend',
-//   async (args, { dispatch }) => {
-//     const result = await getRecommend(8)
-//     dispatch(changeRecommendsAction(result.result))
-//   }
-// )
-// export const fetchNewAlbumsDataAction = createAsyncThunk(
-//   'newAlbums',
-//   async (args, { dispatch }) => {
-//     const result = await getNewAlbum()
-//     dispatch(changeNewAlbumsAction(result.albums))
-//   }
-// )
+import {
+  getBanners,
+  getNewAlbum,
+  getPlaylistDetail,
+  getRecommend
+} from '../service/recommend'
 
 export const fetchRecommendDataAction = createAsyncThunk(
   'fetchdata',
@@ -39,15 +21,31 @@ export const fetchRecommendDataAction = createAsyncThunk(
     })
   }
 )
+const rankingIds = [19723756, 3779629, 2884035]
+export const fetchRankingsDataAction = createAsyncThunk(
+  'rankings',
+  (_, { dispatch }) => {
+    const promises: Promise<any>[] = []
+    for (const id of rankingIds) {
+      promises.push(getPlaylistDetail(id))
+    }
+    Promise.all(promises).then((res) => {
+      const playlists = res.map((item) => item.playlist)
+      dispatch(changeRankingsAction(playlists))
+    })
+  }
+)
 interface IRecommendState {
   banners: any[]
   hotRecommends: any[]
   newAlbums: any[]
+  rankings: any[]
 }
 const initialState: IRecommendState = {
   banners: [],
   hotRecommends: [],
-  newAlbums: []
+  newAlbums: [],
+  rankings: []
 }
 const recommendSlice = createSlice({
   name: 'recommend',
@@ -62,12 +60,16 @@ const recommendSlice = createSlice({
     },
     changeNewAlbumsAction(state, { payload }) {
       state.newAlbums = payload
+    },
+    changeRankingsAction(state, { payload }) {
+      state.rankings = payload
     }
   }
 })
 export const {
   changeBannersAction,
   changeRecommendsAction,
-  changeNewAlbumsAction
+  changeNewAlbumsAction,
+  changeRankingsAction
 } = recommendSlice.actions
 export default recommendSlice.reducer

@@ -4,7 +4,7 @@ import { Carousel } from 'antd'
 
 import { NewAlbumWrapper } from './styled'
 import AreaHeaderV1 from '@/components/area-header-v1'
-import { useAppSelector } from '@/store'
+import { ShallowEqualApp, useAppSelector } from '@/store'
 import NewAlbumItem from '@/components/new-album-item'
 
 interface IProps {
@@ -13,9 +13,12 @@ interface IProps {
 
 const NewAlbum: FC<IProps> = () => {
   const bannerRef = useRef<ElementRef<typeof Carousel>>(null)
-  const { newAlbums } = useAppSelector((state) => ({
-    newAlbums: state.recommend.newAlbums
-  }))
+  const { newAlbums } = useAppSelector(
+    (state) => ({
+      newAlbums: state.recommend.newAlbums
+    }),
+    ShallowEqualApp
+  )
   function handlePrevClick() {
     bannerRef.current?.prev()
   }
