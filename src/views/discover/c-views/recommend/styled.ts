@@ -14,6 +14,12 @@ export const RecommendWrapper = styled.div`
     > .right {
       margin-left: 1px;
       width: 250px;
+
+      .mediaCreator {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+      }
     }
   }
 `
