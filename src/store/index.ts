@@ -7,9 +7,12 @@ import {
 } from 'react-redux'
 
 import recommendReducer from '../views/discover/c-views/recommend/store/recommend'
+import playerReducer from '../views/player/app-player-bar/store/play'
+
 const store = configureStore({
   reducer: {
-    recommend: recommendReducer
+    recommend: recommendReducer,
+    play: playerReducer
   }
 })
 type GetStateFnTyPE = typeof store.getState

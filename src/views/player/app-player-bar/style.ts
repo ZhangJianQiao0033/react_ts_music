@@ -5,7 +5,7 @@ export const PlayerBarWrapper = styled.div`
   z-index: 99;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0px;
   height: 52px;
   background-position: 0 0;
   background-repeat: repeat-x;
@@ -21,7 +21,10 @@ export const PlayerBarWrapper = styled.div`
     height: 47px;
   }
 `
-export const BarControl = styled.div`
+interface IBarControl {
+  $isPlaying: boolean
+}
+export const BarControl = styled.div<IBarControl>`
   display: flex;
   align-items: center;
   .prev,
@@ -41,7 +44,8 @@ export const BarControl = styled.div`
     width: 36px;
     height: 36px;
     margin: 0 8px;
-    background-position: 0 -204px;
+    background-position: 0
+      ${(props) => (props.$isPlaying ? '-165px' : '-204px')};
   }
 `
 
@@ -76,7 +80,7 @@ export const BarPlayerInfo = styled.div`
         margin-right: 10px;
         .ant-slider-rail {
           height: 9px;
-          background: url(${require('@/assets/img/progress_bar.png')}) right 0;
+          background: url(${require('@/assets/img/progress_bar.png')}) left 0;
         }
         .ant-slider-track {
           height: 9px;
@@ -86,7 +90,7 @@ export const BarPlayerInfo = styled.div`
           width: 22px;
           height: 24px;
           border: none;
-          margin-top: -3px;
+          margin-top: -4px;
           background: url(${require('@/assets/img/sprite_icon.png')}) 0 -250px;
 
           &::before,
@@ -95,8 +99,61 @@ export const BarPlayerInfo = styled.div`
           }
         }
       }
+
+      .time {
+        .current {
+          color: #e1e1e1;
+        }
+
+        .divider {
+          margin: 0 3px;
+        }
+      }
     }
   }
 `
 
-export const BarOperator = styled.div``
+export const BarOperator = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 3px;
+  .left {
+    .btn {
+      width: 25px;
+      height: 25px;
+    }
+    .pip {
+      background: url(${require('@/assets/img/pip_icon')});
+    }
+    .favor {
+      background-position: -88px -163px;
+    }
+
+    .share {
+      background-position: -114px -163px;
+    }
+  }
+
+  .right {
+    width: 126px;
+    box-sizing: border-box;
+    padding-left: 13px;
+    background-position: -147px -248px;
+
+    .btn {
+      width: 25px;
+      height: 25px;
+    }
+    .volume {
+      background-position: -2px -248px;
+    }
+    .loop {
+      background-position: -3px -344px;
+    }
+    .playlist {
+      width: 59px;
+      background-position: -42px -68px;
+    }
+  }
+`
