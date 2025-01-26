@@ -21,3 +21,13 @@ export function getImageSize(
 ) {
   return imageUrl + `?param=${width}x${height}`
 }
+
+export function formatTime(time: number) {
+  const minutes = Math.floor(time / 1000 / 60) // 获取分钟数
+  const seconds = Math.floor((time / 1000) % 60) // 获取秒数
+
+  // 格式化为 00:00 的格式
+  return `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`
+}

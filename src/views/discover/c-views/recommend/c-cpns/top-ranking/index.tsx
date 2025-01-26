@@ -3,7 +3,7 @@ import type { ReactNode, FC } from 'react'
 import { RankingWrapper } from './styled'
 import AreaHeaderV1 from '@/components/area-header-v1'
 import { ShallowEqualApp, useAppSelector } from '@/store'
-import TopRankingItem from '../hot-recommend/top-ranking-item'
+import TopRankingItem from '../top-ranking-item'
 
 interface IProps {
   children?: ReactNode

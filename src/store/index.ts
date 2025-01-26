@@ -16,7 +16,7 @@ const store = configureStore({
   }
 })
 type GetStateFnTyPE = typeof store.getState
-type IRootState = ReturnType<GetStateFnTyPE>
+export type IRootState = ReturnType<GetStateFnTyPE>
 type IDispatch = typeof store.dispatch
 export const useAppSelector: TypedUseSelectorHook<IRootState> = useSelector
 export const useAppDispatch: () => IDispatch = useDispatch
